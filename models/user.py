@@ -11,3 +11,4 @@ class User(Base):
     email = Column(String, unique=True)
     password = Column(String)
     posts = relationship("Post", cascade="all, delete", back_populates='user', lazy='joined')
+    inbodies = relationship("InBody", cascade="all, delete", back_populates="user", lazy="joined")

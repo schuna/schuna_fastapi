@@ -4,6 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
+import endpoints.inbody as inbody_endpoints
 import endpoints.comment as comment_endpoints
 import endpoints.authentication as auth_endpoints
 import endpoints.post as post_endpoints
@@ -18,6 +19,7 @@ def create_app() -> FastAPI:
 
     fast_app = FastAPI()
     fast_app.container = container
+    fast_app.include_router(inbody_endpoints.router)
     fast_app.include_router(comment_endpoints.router)
     fast_app.include_router(auth_endpoints.router)
     fast_app.include_router(user_endpoints.router)
