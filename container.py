@@ -17,7 +17,8 @@ class Container(containers.DeclarativeContainer):
         "endpoints.post",
         "endpoints.user",
         "endpoints.authentication",
-        "common.oauth2"
+        "common.oauth2",
+        "api.router"
     ])
     config = providers.Configuration(yaml_files=["config.yml"])
     db = providers.Singleton(Database, db_url=config.db.url)

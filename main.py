@@ -4,11 +4,12 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 
-import endpoints.inbody as inbody_endpoints
-import endpoints.comment as comment_endpoints
 import endpoints.authentication as auth_endpoints
+import endpoints.comment as comment_endpoints
+import endpoints.inbody as inbody_endpoints
 import endpoints.post as post_endpoints
 import endpoints.user as user_endpoints
+from api.router import graphql_router
 from container import Container
 
 
@@ -24,6 +25,7 @@ def create_app() -> FastAPI:
     fast_app.include_router(auth_endpoints.router)
     fast_app.include_router(user_endpoints.router)
     fast_app.include_router(post_endpoints.router)
+    fast_app.include_router(graphql_router, prefix='/graphql')
 
     origins = [
         'http://localhost:3000',
