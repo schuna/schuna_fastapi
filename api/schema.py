@@ -1,10 +1,8 @@
-from typing import Iterator
-
 # noinspection PyPackageRequirements
 import strawberry
 
 from api.fields import InBodySchema
-from api.resolvers import get_inbodies
+from api.resolvers import get_inbodies, create_inbody
 from common.auth import IsAuthenticated
 
 
@@ -16,6 +14,15 @@ class Query:
     )
 
 
+@strawberry.type
+class Mutation:
+    create_inbody: InBodySchema = strawberry.mutation(
+        resolver=create_inbody,
+        permission_classes=[IsAuthenticated]
+    )
+
+
 schema = strawberry.Schema(
     query=Query,
+    mutation=Mutation
 )

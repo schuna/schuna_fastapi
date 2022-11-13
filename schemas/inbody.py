@@ -8,7 +8,7 @@ class InBodyBase(BaseModel):
     weight: float
     fat_rate: float
     timestamp: Optional[datetime] = datetime.now()
-    user_id: float
+    user_id: int
 
 
 class InBodyDisplay(BaseModel):

@@ -1,5 +1,5 @@
 from datetime import datetime
-import models.inbody
+from typing import Optional
 
 # noinspection PyPackageRequirements
 import strawberry
@@ -18,3 +18,11 @@ class InBodySchema:
     fat_rate: float
     timestamp: datetime
     user: UserSchema
+
+
+@strawberry.input
+class InBodyCreate:
+    weight: float
+    fat_rate: float
+    timestamp: Optional[datetime] = datetime.now()
+    user_id: strawberry.ID
