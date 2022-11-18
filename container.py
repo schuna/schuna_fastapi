@@ -12,13 +12,15 @@ from services.user import UserService
 
 class Container(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(modules=[
-        "endpoints.inbody",
-        "endpoints.comment",
-        "endpoints.post",
-        "endpoints.user",
-        "endpoints.authentication",
+        "webapps.posts.route_posts",
+        "webapps.users.route_users",
+        "api.routers.inbody",
+        "api.routers.comment",
+        "api.routers.post",
+        "api.routers.user",
+        "api.routers.authentication",
+        "api.routers.graphql",
         "common.oauth2",
-        "api.router"
     ])
     config = providers.Configuration(yaml_files=["config.yml"])
     db = providers.Singleton(Database, db_url=config.db.url)

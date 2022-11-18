@@ -12,3 +12,4 @@ python-jose
 bcrypt
 deta
 strawberry-graphql
+jinja2

@@ -1,8 +1,8 @@
 # noinspection PyPackageRequirements
 import strawberry
 
-from api.fields import InBodySchema
-from api.resolvers import get_inbodies, create_inbody
+from api.graphql.fields import InBodySchema
+from api.graphql.resolvers import get_inbodies, create_inbody
 from common.auth import IsAuthenticated
 
 

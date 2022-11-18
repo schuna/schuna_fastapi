@@ -2,7 +2,7 @@ from fastapi import HTTPException, status
 # noinspection PyPackageRequirements
 from strawberry.types import Info
 
-from api.fields import InBodySchema, InBodyCreate
+from api.graphql.fields import InBodySchema, InBodyCreate
 from schemas.inbody import InBodyBase
 
 

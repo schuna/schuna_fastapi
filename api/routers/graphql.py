@@ -1,11 +1,9 @@
 from dependency_injector.wiring import Provide, inject
 from fastapi import Depends
 # noinspection PyPackageRequirements
-from strawberry.asgi import GraphQL
-# noinspection PyPackageRequirements
 from strawberry.fastapi import GraphQLRouter, BaseContext
 
-from api.schema import schema
+from api.graphql.schema import schema
 from container import Container
 from services.comment import CommentService
 from services.inbody import InBodyService
@@ -38,4 +36,3 @@ async def get_context(custom_context=Depends(custom_context_dependency), ):
 
 
 graphql_router = GraphQLRouter(schema, context_getter=get_context, )
-graphql_app = GraphQL(schema)
