@@ -23,7 +23,7 @@ async def login(request: Request):
         try:
             form.__dict__.update(msg="Login Successful :)")
             response = templates.TemplateResponse("auth/login.html", form.__dict__)
-            get_token(response=response, request=form)
+            get_token(response=response, request=request, request_form=form)
             return response
         except HTTPException:
             form.__dict__.update(msg="")

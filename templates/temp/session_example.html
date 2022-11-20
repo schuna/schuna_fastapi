@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript Session</title>
+
+
+    <script language="JavaScript">
+        document.addEventListener("DOMContentLoaded", function () {
+            if (window.sessionStorage) {
+                sessionStorage.clear()
+            } else {
+                alert("Browser not support session!")
+            }
+        });
+
+        function printSessionStorage() {
+            let output = "";
+            for (let key in window.sessionStorage) {
+                output += "<p>";
+                output += ":" + sessionStorage.getItem(key);
+                output += "</p>";
+            }
+            document.getElementById("output").innerHTML = output;
+        }
+
+        function saveSessionStorage() {
+            let key = document.getElementById("key").value;
+            let value = document.getElementById("value").value;
+            sessionStorage.setItem(key, value);
+            printSessionStorage();
+        }
+
+        function setCookie(cname, cvalue, exdays) {
+            const d = new Date();
+            d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + d.toUTCString();
+            document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+        }
+
+        function getCookie(cname) {
+            let name = cname + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function checkCookie() {
+            let username = getCookie("username");
+            if (username != "") {
+                alert("Welcome again " + username);
+            } else {
+                username = prompt("Please enter your name:", "");
+                if (username != "" && username != null) {
+                    setCookie("username", username, 365);
+                }
+            }
+        }
+
+        function validate() {
+            'use strict';
+
+            let UserName = document.getElementById('UserName').value;
+            let email = "adrian@tissue.com";
+            let email1 = "admin@tissue.com";
+            let Password = document.getElementById('Password').value;
+            let pass = "welcome1";
+            let pass1 = "admin123";
+
+// stored data from the register-form
+
+            let storedName = sessionStorage.getItem('email');
+            let storedPw = sessionStorage.getItem('password');
+
+// entered data from the login-form
+
+            if ((UserName == email) && (Password == pass)) {
+                console.log("Issues.html");
+                return false;
+            } else if ((UserName == email1) && (Password == pass1)) {
+                console.log("subscription_dashboard.html");
+                return false;
+            } else if ((UserName == storedName) && (Password == storedPw)) {
+                console.log("Issues.html");
+                return false;
+            } else {
+                alert("username and/or password do not match");
+                return false;
+            }
+        }
+
+        function init() {
+            'use strict';
+
+            if (document && document.getElementById) {
+                let loginform = document.getElementById('loginform');
+                loginform.onsubmit = validate;
+            }
+        }
+
+        window.onload = init;
+    </script>
+</head>
+</script>
+<body>
+<input type="text" id="key" value=""/>
+<input type="text" id="value" value=""/>
+<input type="button" value="save" onclick="saveSessionStorage();"/>
+
+<div id="output"></div>
+
+<div id="signupForm">
+    <form action="" method="post" id="loginform" onsubmit="return validate()">
+        <div class="labels">
+            <label for="UserName">UserName:</label>
+        </div>
+        <div class="rightTab">
+            <input type="email" name="UserName" id="UserName" class="input-field" placeholder="E-mail Address" required>
+        </div>
+        <div class="labels">
+            <label for="Password">Password:</label>
+        </div>
+        <div class="rightTab">
+            <input type="password" name="Password" id="Password" class="input-field" placeholder="Password" required>
+        </div>
+        <div id="loginwrap">
+            <hr>
+            <input class="button" type="submit" value="Submit">
+        </div>
+    </form>
+</div>
+</body>
+</html>
